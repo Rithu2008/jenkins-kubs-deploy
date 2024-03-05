@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "rddeepak/deepak"
+    dockerimagename = "rithu2008/TestApp"
     dockerImage = ""
   }
 
@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/naga1979/nodeapp_test.git'
+        git 'https://github.com/Rithu2008/node-app.git'
       }
     }
 
@@ -25,7 +25,7 @@ pipeline {
 
     stage('Pushing Image') {
       environment {
-               registryCredential = 'dockerhublogin'
+               registryCredential = 'DockerHubLogin'
            }
       steps{
         script {
@@ -39,7 +39,7 @@ pipeline {
     stage('Deploying App to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kube-config")
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "KubeConfig")
         }
       }
     }
